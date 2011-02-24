@@ -11,7 +11,8 @@ parser.add_option('-b', '--begin', dest='first_day', type='int', default=1, help
 parser.add_option('-e', '--end', dest='last_day', type='int', default=1, help='last day of month to retrieve (default %default)')
 parser.add_option('-m', '--month', dest='month', type='int', default=1, metavar='MM', help='retrieve data for month number MM (default %default)')
 parser.add_option('-y', '--year', dest='year', type='int', default=2010, metavar='YYYY', help='retrieve data for year YYYY (default %default)')
-parser.add_option('-o', '--output', dest='output', metavar='FILE', help='save ARFF output to FILE')
+parser.add_option('-o', '--output', dest='output', metavar='FILE', help='save output to FILE')
+parser.add_option('-f', '--format', dest='format', type='choice', choices=['csv', 'arff'], default='arff', help='output format of the data (csv or arff; default %default)')
 (options, args) = parser.parse_args()
 
 # Construct POST data
