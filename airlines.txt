@@ -1,0 +1,24 @@
+9E	Pinnacle Airlines
+AA	American Airlines
+AQ	Aloha Airlines
+AS	Alaska Airlines
+B6	JetBlue Airways
+CO	Continental Airlines
+DH	Atlantic Coast Airlines
+DL	Delta Air Lines
+EV	Atlantic Southeast Airlines
+F9	Frontier Airlines
+FL	AirTran Airways
+HA	Hawaiian Airlines
+HP	America West Airlines
+MQ	American Eagle
+NW	Northwest Airlines
+OH	Comair
+OO	SkyWest Airlines
+TW	Trans World Airlines
+TZ	ATA Airlines
+UA	United Airlines
+US	US Airways
+WN	Southwest Airlines
+XE	ExpressJet Airlines
+YV	Mesa Airlines
