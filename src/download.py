@@ -34,9 +34,12 @@ for day in range(options.first_day, options.last_day+1):
     params['Day%i' % day] = day
 
 # Request data
-data = urllib.urlopen('http://www.bts.gov/xml/ontimesummarystatistics/src/dstat/OntimeSummaryDepaturesDataCSV.xml', urllib.urlencode(params)).read()
-if options.output:
-    with open(options.output, 'w') as output:
-        output.write(data)
-else:
-    print data
+data = urllib.urlopen('http://www.bts.gov/xml/ontimesummarystatistics/src/dstat/OntimeSummaryDepaturesDataCSV.xml', urllib.urlencode(params))
+if options.format == 'csv':
+    if options.output:
+        with open(options.output, 'w') as output:
+            output.write(data.read())
+    else:
+        print data.read()
+elif options.format == 'arff':
+    pass
