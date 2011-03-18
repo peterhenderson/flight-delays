@@ -29,36 +29,43 @@ params = {
     'delay': 'Cause of Delay',
     'airport1': options.airport,
 }
-for day in range(options.first_day, options.last_day+1):
-    params['Day%i' % day] = day
+#for day in range(options.first_day, options.last_day+1):
+#    params['Day%i' % day] = day
 
 airlines = [ 'AA', 'CO', 'DL', 'UA', 'WN' ]
+airports = ['ORD', 'BOS', 'SEA', 'IAD', 'MSP', 'PWM', 'DSM', 'MEM', 'CMH', 'FYI', 'DEN']
 
-for airline in airlines:
-  params['airline'] = airline
-  for year in range(2008, 2011):
-    
-    params['year1'] = str(year)
-    
-    for i in range(1, 13):
-      params['month%i' % i] = i
-      options.output = 'data/%s/%s_%s_%i_%i.csv' % (options.airport, options.airport, airline, i, year )
-      print options.output
-      # Request data
-      dataStr = "<!DOCTYPE HTML"
-      #make sure we don't get an error page from the server
-      while dataStr.startswith("<!DOCTYPE HTML"):
-	data = urllib.urlopen('http://www.bts.gov/xml/ontimesummarystatistics/src/dstat/OntimeSummaryDepaturesDataCSV.xml', urllib.urlencode(params))
-	dataStr = data.read()
-	
-	#if we do get an error then we just wait a few seconds and try again
-	if dataStr.startswith("<!DOCTYPE HTML"):
-	  print "Error. Trying again in 10 seconds...."
-	  time.sleep(10)
+for airport in airports:
+  options.airport = airport
+  params['airport1'] = airport
+  for airline in airlines:
+    params['airline'] = airline
+    for year in range(2008, 2011):
       
-      with open(options.output, 'w') as output:
-	output.write(dataStr)
-	#print data.read()
-      del params['month%i' % i]
+      params['year1'] = str(year)
+      
+      for month in range(1, 13):
+        params['month%i' % month] = month
+        for day in range(1, 32):
+          params['Day%i' % day] = str(day)
+          options.output = 'data/%s/%s_%s_%i_%02i_%02i.csv' % (options.airport, options.airport, airline, year, month, day )
+          print options.output
+          # Request data
+          dataStr = "<!DOCTYPE HTML"
+          #make sure we don't get an error page from the server
+          while dataStr.startswith("<!DOCTYPE HTML"):
+            data = urllib.urlopen('http://www.bts.gov/xml/ontimesummarystatistics/src/dstat/OntimeSummaryDepaturesDataCSV.xml', urllib.urlencode(params))
+            dataStr = data.read()
+            
+            #if we do get an error then we just wait a few seconds and try again
+            if dataStr.startswith("<!DOCTYPE HTML"):
+              print "Error. Trying again in 10 seconds...."
+              time.sleep(10)
+          
+          with open(options.output, 'w') as output:
+            output.write(dataStr)
+            #print data.read()
+          del params['Day%i' % day]
+        del params['month%i' % month]
 
     
